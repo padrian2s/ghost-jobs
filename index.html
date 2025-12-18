@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Job Tracker - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .banner-container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .ghost-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .site-name {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .language-dropdown {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            min-width: 150px;
+        }
+
+        .language-dropdown:focus {
+            outline: none;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .announcement {
+            display: none;
+        }
+
+        .announcement.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .features {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .site-name {
+                font-size: 1.8rem;
+            }
+            .tagline {
+                font-size: 1.4rem;
+            }
+            .language-selector {
+                position: static;
+                margin-top: 15px;
+            }
+            .header {
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <div class="header">
+            <div class="ghost-icon">👻</div>
+            <div class="site-name">Ghost Job Tracker</div>
+            <div class="language-selector">
+                <select class="language-dropdown" id="languageSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">🇬🇧 English</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="pt">🇵🇹 Português</option>
+                    <option value="nl">🇳🇱 Nederlands</option>
+                    <option value="pl">🇵🇱 Polski</option>
+                    <option value="ro">🇷🇴 Română</option>
+                    <option value="sv">🇸🇪 Svenska</option>
+                    <option value="cs">🇨🇿 Čeština</option>
+                    <option value="hu">🇭🇺 Magyar</option>
+                    <option value="el">🇬🇷 Ελληνικά</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- English -->
+            <div class="announcement active" id="lang-en">
+                <h2 class="tagline">Stop Wasting Time on Fake Job Postings!</h2>
+                <p class="description">
+                    We're building the first platform dedicated to tracking and exposing ghost jobs —
+                    those frustrating job listings that companies post with no intention of actually hiring.
+                    Our community-driven database will help real job seekers identify legitimate opportunities
+                    and avoid wasting precious time on dead-end applications.
+                </p>
+                <div class="coming-soon">Coming Soon</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Track Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Save Your Time</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Community Reports</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- German -->
+            <div class="announcement" id="lang-de">
+                <h2 class="tagline">Verschwenden Sie keine Zeit mehr mit gefälschten Stellenanzeigen!</h2>
+                <p class="description">
+                    Wir entwickeln die erste Plattform, die Ghost Jobs aufspürt und aufdeckt —
+                    diese frustrierenden Stellenanzeigen, die Unternehmen veröffentlichen, ohne wirklich
+                    einzustellen. Unsere Community-basierte Datenbank wird echten Arbeitssuchenden helfen,
+                    legitime Möglichkeiten zu erkennen und keine wertvolle Zeit mit aussichtslosen
+                    Bewerbungen zu verschwenden.
+                </p>
+                <div class="coming-soon">Demnächst</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Ghost Jobs aufspüren</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Zeit sparen</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Community-Meldungen</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Italian -->
+            <div class="announcement" id="lang-it">
+                <h2 class="tagline">Smetti di perdere tempo con annunci di lavoro falsi!</h2>
+                <p class="description">
+                    Stiamo costruendo la prima piattaforma dedicata al tracciamento e all'esposizione
+                    dei ghost jobs — quegli annunci di lavoro frustranti che le aziende pubblicano senza
+                    alcuna intenzione di assumere. Il nostro database guidato dalla community aiuterà i
+                    veri cercatori di lavoro a identificare opportunità legittime e a evitare di sprecare
+                    tempo prezioso in candidature senza sbocco.
+                </p>
+                <div class="coming-soon">Prossimamente</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Traccia Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Risparmia Tempo</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Segnalazioni Community</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- French -->
+            <div class="announcement" id="lang-fr">
+                <h2 class="tagline">Arrêtez de perdre du temps avec les fausses offres d'emploi !</h2>
+                <p class="description">
+                    Nous construisons la première plateforme dédiée au suivi et à l'exposition des
+                    ghost jobs — ces offres d'emploi frustrantes que les entreprises publient sans
+                    aucune intention d'embaucher. Notre base de données communautaire aidera les vrais
+                    chercheurs d'emploi à identifier les opportunités légitimes et à éviter de perdre
+                    un temps précieux sur des candidatures sans issue.
+                </p>
+                <div class="coming-soon">Bientôt disponible</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Traquer les Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Gagnez du temps</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Signalements communautaires</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spanish -->
+            <div class="announcement" id="lang-es">
+                <h2 class="tagline">¡Deja de perder tiempo con ofertas de trabajo falsas!</h2>
+                <p class="description">
+                    Estamos construyendo la primera plataforma dedicada a rastrear y exponer los
+                    ghost jobs — esas frustrantes ofertas de trabajo que las empresas publican sin
+                    ninguna intención de contratar. Nuestra base de datos impulsada por la comunidad
+                    ayudará a los buscadores de empleo reales a identificar oportunidades legítimas
+                    y evitar perder tiempo valioso en solicitudes sin salida.
+                </p>
+                <div class="coming-soon">Próximamente</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Rastrear Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Ahorra tiempo</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Reportes comunitarios</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portuguese -->
+            <div class="announcement" id="lang-pt">
+                <h2 class="tagline">Pare de perder tempo com vagas de emprego falsas!</h2>
+                <p class="description">
+                    Estamos construindo a primeira plataforma dedicada a rastrear e expor ghost jobs —
+                    aquelas vagas frustrantes que as empresas publicam sem nenhuma intenção de contratar.
+                    Nosso banco de dados impulsionado pela comunidade ajudará os verdadeiros candidatos
+                    a identificar oportunidades legítimas e evitar desperdiçar tempo precioso com
+                    candidaturas sem futuro.
+                </p>
+                <div class="coming-soon">Em breve</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Rastrear Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Economize tempo</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Denúncias da comunidade</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dutch -->
+            <div class="announcement" id="lang-nl">
+                <h2 class="tagline">Stop met tijd verspillen aan nepvacatures!</h2>
+                <p class="description">
+                    We bouwen het eerste platform dat ghost jobs opspoort en blootlegt —
+                    die frustrerende vacatures die bedrijven plaatsen zonder de intentie om
+                    daadwerkelijk iemand aan te nemen. Onze community-gedreven database zal
+                    echte werkzoekenden helpen legitieme kansen te identificeren en kostbare
+                    tijd te besparen op uitzichtloze sollicitaties.
+                </p>
+                <div class="coming-soon">Binnenkort beschikbaar</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Ghost Jobs opsporen</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Bespaar tijd</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Community meldingen</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Polish -->
+            <div class="announcement" id="lang-pl">
+                <h2 class="tagline">Przestań tracić czas na fałszywe oferty pracy!</h2>
+                <p class="description">
+                    Tworzymy pierwszą platformę poświęconą śledzeniu i ujawnianiu ghost jobs —
+                    tych frustrujących ogłoszeń o pracę, które firmy publikują bez zamiaru
+                    faktycznego zatrudnienia. Nasza baza danych tworzona przez społeczność pomoże
+                    prawdziwym poszukującym pracy zidentyfikować legalne możliwości i uniknąć
+                    marnowania cennego czasu na bezowocne aplikacje.
+                </p>
+                <div class="coming-soon">Wkrótce</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Śledź Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Oszczędź czas</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Zgłoszenia społeczności</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Romanian -->
+            <div class="announcement" id="lang-ro">
+                <h2 class="tagline">Nu mai pierde timp cu anunțuri de angajare false!</h2>
+                <p class="description">
+                    Construim prima platformă dedicată urmăririi și expunerii ghost jobs —
+                    acele anunțuri de angajare frustrante pe care companiile le postează fără
+                    nicio intenție de a angaja cu adevărat. Baza noastră de date condusă de
+                    comunitate va ajuta adevărații căutători de joburi să identifice oportunitățile
+                    legitime și să evite pierderea timpului prețios cu aplicații fără viitor.
+                </p>
+                <div class="coming-soon">În curând</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Urmărește Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Economisește timp</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Raportări comunitate</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swedish -->
+            <div class="announcement" id="lang-sv">
+                <h2 class="tagline">Sluta slösa tid på falska jobbannonser!</h2>
+                <p class="description">
+                    Vi bygger den första plattformen dedikerad till att spåra och avslöja ghost jobs —
+                    de frustrerande jobbannonser som företag publicerar utan någon avsikt att faktiskt
+                    anställa. Vår community-drivna databas kommer att hjälpa riktiga jobbsökande att
+                    identifiera legitima möjligheter och undvika att slösa dyrbar tid på ansökningar
+                    som leder ingenstans.
+                </p>
+                <div class="coming-soon">Kommer snart</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Spåra Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Spara tid</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Community-rapporter</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Czech -->
+            <div class="announcement" id="lang-cs">
+                <h2 class="tagline">Přestaňte ztrácet čas s falešnými pracovními nabídkami!</h2>
+                <p class="description">
+                    Budujeme první platformu věnovanou sledování a odhalování ghost jobs —
+                    těch frustrujících pracovních inzerátů, které firmy zveřejňují bez úmyslu
+                    skutečně někoho zaměstnat. Naše komunitní databáze pomůže skutečným uchazečům
+                    o práci identifikovat legitimní příležitosti a vyhnout se plýtvání drahocenným
+                    časem na bezvýchodné žádosti.
+                </p>
+                <div class="coming-soon">Již brzy</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Sledovat Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Ušetřete čas</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Komunitní hlášení</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hungarian -->
+            <div class="announcement" id="lang-hu">
+                <h2 class="tagline">Ne pazarold az idődet hamis álláshirdetésekre!</h2>
+                <p class="description">
+                    Építjük az első platformot, amely a ghost jobs nyomon követésére és
+                    leleplezésére szakosodott — ezek azok a frusztráló álláshirdetések,
+                    amelyeket a cégek közzétesznek anélkül, hogy ténylegesen alkalmaznának.
+                    A közösség által vezérelt adatbázisunk segít a valódi álláskeresőknek
+                    azonosítani a legitim lehetőségeket, és elkerülni az értékes idő pazarlását
+                    kilátástalan jelentkezésekre.
+                </p>
+                <div class="coming-soon">Hamarosan</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Ghost Jobs követése</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Időmegtakarítás</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Közösségi bejelentések</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Greek -->
+            <div class="announcement" id="lang-el">
+                <h2 class="tagline">Σταματήστε να χάνετε χρόνο με ψεύτικες αγγελίες εργασίας!</h2>
+                <p class="description">
+                    Χτίζουμε την πρώτη πλατφόρμα αφιερωμένη στην παρακολούθηση και αποκάλυψη
+                    των ghost jobs — αυτές τις απογοητευτικές αγγελίες εργασίας που οι εταιρείες
+                    δημοσιεύουν χωρίς καμία πρόθεση να προσλάβουν. Η βάση δεδομένων μας που
+                    καθοδηγείται από την κοινότητα θα βοηθήσει τους πραγματικούς αναζητούντες
+                    εργασία να εντοπίσουν νόμιμες ευκαιρίες και να αποφύγουν να σπαταλήσουν
+                    πολύτιμο χρόνο σε αδιέξοδες αιτήσεις.
+                </p>
+                <div class="coming-soon">Έρχεται σύντομα</div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">Παρακολούθηση Ghost Jobs</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-text">Εξοικονόμηση χρόνου</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-text">Αναφορές κοινότητας</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeLanguage(lang) {
+            // Hide all announcements
+            document.querySelectorAll('.announcement').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show selected language
+            document.getElementById('lang-' + lang).classList.add('active');
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Save preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Load saved language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                document.getElementById('languageSelect').value = savedLang;
+                changeLanguage(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>
